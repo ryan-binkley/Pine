@@ -14,14 +14,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Set up {TODO}
-      #   uses: actions/setup-node@v4
+      - name: Install build tools
+        run: sudo apt-get update && sudo apt-get install -y build-essential
 
-      # - name: Install dependencies
-      #   run: TODO
+      - name: Build project
+        run: make
 
-      # - name: Run build
-      #   run: TODO
+      - name: Run tests
+        run: make test
 
-      # - name: Run tests
-      #   run: TODO
+      - name: Clean up
+        run: make clean
