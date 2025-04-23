@@ -1,0 +1,28 @@
+name: Pine
+
+services:
+  pine:
+    container_name: pine_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pine_image:latest
+    ports:
+      - 8080:8080
+    develop:
+      watch:
+        - action: rebuild
+          path: ./src
+        - action: rebuild
+          path: ./include
+    networks:
+      - pine_network
+
+networks:
+  pine_network:
+    name: pine_network
+
+volumes:
+  pine_volume:
+    name: pine_volume
+    driver: local

@@ -19,13 +19,24 @@ TEST_OUT := $(BIN_DIR)/test_runner
 # Default target
 all: $(OUT)
 
+# Start the server
+start:
+	docker compose build
+	docker compose watch
+
+# Stop the server
+stop:
+	docker compose down
+
 # Run the main executable
 run: $(OUT)
 	./$(OUT)
 
+update-dependencies:
+	git submodule update --init --recursive
+
 # Link the object files + main.o into the executable
 $(OUT): $(OBJ) $(MAIN_OBJ)
-	git submodule update --init --recursive
 	mkdir -p $(BIN_DIR)
 	$(CC) $(CFLAGS) -o $@ $^
 
