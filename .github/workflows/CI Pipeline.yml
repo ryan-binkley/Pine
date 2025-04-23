@@ -25,7 +25,13 @@ jobs:
         shell: bash
 
       - name: Install build tools
-        run: sudo apt-get update && sudo apt-get install -y build-essential
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cppcheck
+
+      - name: Run linter
+        run: |
+          cppcheck --check-config --enable=all --suppress=missingIncludeSystem $(find src/ -name '*.c')
 
       - name: Build project
         run: make
