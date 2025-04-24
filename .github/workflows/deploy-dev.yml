@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+env:
+  DEV_HOST_IP: ${{ env.DEV_HOST_IP }}
 
 jobs:
   deploy-to-dev:
