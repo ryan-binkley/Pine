@@ -6,12 +6,13 @@ on:
       - main
 
 jobs:
-  name: Validate Host
-  run: |
-    if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
-      echo "Error: DEV_HOST_IP is not set."
-      exit 1
-    fi
+  validate-host:
+    name: Validate Host
+    run: |
+      if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
+        echo "Error: DEV_HOST_IP is not set."
+        exit 1
+      fi
 
     
   deploy-to-dev:
