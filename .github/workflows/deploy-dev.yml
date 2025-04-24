@@ -13,17 +13,10 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Validate Host
-        run: |
-          if [ -z "${{ env.DEV_HOST_IP }}" ]; then
-            echo "Error: DEV_HOST_IP is not set."
-            exit 1
-          fi
-
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.DEV_HOST_IP }}
+          host: ${{ env.DEV_HOST_IP }}
           username: pine_user
           key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
           script: |
