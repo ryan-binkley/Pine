@@ -1,11 +1,25 @@
-- name: Deploy to Droplet
-  uses: appleboy/ssh-action@master
-  with:
-    host: ${{ secrets.DEV_HOST_IP }}
-    username: pine_user
-    key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
-    script: |
-      cd /home/pine_user/Pine
-      git pull origin main
-      docker compose down
-      docker compose up -d --build --remove-orphans
+name: Deploy to Droplet
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Deploy to Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_HOST_IP }}
+          username: pine_user
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/pine_user/Pine
+            git pull origin main
+            docker compose down
+            docker compose up -d --build
