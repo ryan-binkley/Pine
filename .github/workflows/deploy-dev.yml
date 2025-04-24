@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - main
-env:
-  DEV_HOST_IP: ${{ env.DEV_HOST_IP }}
 
 jobs:
   deploy-to-dev:
@@ -18,7 +16,7 @@ jobs:
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ env.DEV_HOST_IP }}
+          host: ${{ secrets.DEV_HOST_IP }}
           username: pine_user
           key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
           script: |
