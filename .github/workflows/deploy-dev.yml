@@ -6,7 +6,8 @@ on:
       - main
 
 jobs:
-  deploy:
+  deploy-to-dev:
+    name: Deploy to Development Droplet
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
