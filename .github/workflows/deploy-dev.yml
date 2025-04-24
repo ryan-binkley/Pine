@@ -15,7 +15,7 @@ jobs:
 
       - name: Validate Host
         run: |
-          if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
+          if [ -z "${{ env.DEV_HOST_IP }}" ]; then
             echo "Error: DEV_HOST_IP is not set."
             exit 1
           fi
