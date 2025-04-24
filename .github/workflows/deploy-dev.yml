@@ -6,21 +6,19 @@ on:
       - main
 
 jobs:
-  validate-host:
-    name: Validate Host
-    run: |
-      if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
-        echo "Error: DEV_HOST_IP is not set."
-        exit 1
-      fi
-
-    
   deploy-to-dev:
     name: Deploy to Development Droplet
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2
+
+      - name: Validate Host
+        run: |
+          if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
+            echo "Error: DEV_HOST_IP is not set."
+            exit 1
+          fi
 
       - name: Deploy to Droplet
         uses: appleboy/ssh-action@master
