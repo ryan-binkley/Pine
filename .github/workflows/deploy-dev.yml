@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-- name: Validate Host
+  name: Validate Host
   run: |
     if [ -z "${{ secrets.DEV_HOST_IP }}" ]; then
       echo "Error: DEV_HOST_IP is not set."
