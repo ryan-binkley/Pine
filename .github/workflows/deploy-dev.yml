@@ -6,9 +6,30 @@ on:
       - main
 
 jobs:
+  set-secrets:
+    name: Set Secrets on Droplet
+    runs-on: ubuntu-latest
+    environment: Pine-dev
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      # Step 1: SSH into the Droplet and set secrets
+      - name: Set Secrets on Droplet
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_HOST_IP }}
+          username: pine_user
+          key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/pine_user/Pine
+            echo "LOGTAIL_TOKEN=${{ secrets.LOGTAIL_TOKEN }}" > .env
+
+
   deploy-to-dev:
     name: Deploy to Development Droplet
     runs-on: ubuntu-latest
+    environment: Pine-dev
     steps:
       - name: Checkout Code
         uses: actions/checkout@v2

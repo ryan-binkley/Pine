@@ -1,6 +1,7 @@
 CC := gcc
 INCLUDES := -Iinclude -Ivendor/minunit
 CFLAGS := -Wall -Wextra $(INCLUDES)
+LDFLAGS := -lcurl
 
 SRC_DIR := src
 OBJ_DIR := build/obj
@@ -38,22 +39,22 @@ update-dependencies:
 # Link the object files + main.o into the executable
 $(OUT): $(OBJ) $(MAIN_OBJ)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Pattern rule to build object files into build/obj/
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 # Special rule for main.o
 $(MAIN_OBJ): $(SRC_DIR)/main.c
-	mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@ $(LDFLAGS)
 
 # Test target
 test: $(TEST_SRC) $(SRC)
 	mkdir -p $(BIN_DIR)
-	$(CC) $(CFLAGS) -o $(TEST_OUT) $(TEST_SRC)
+	$(CC) $(CFLAGS) -o $(TEST_OUT) $(TEST_SRC) $(LDFLAGS)
 	./$(TEST_OUT)
 
 # Clean up build artifacts
