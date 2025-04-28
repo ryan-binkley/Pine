@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk add --no-cache build-base git
+RUN apk add --no-cache build-base git curl-dev curl libcurl
 
 WORKDIR /app
 COPY ./include ./include
@@ -10,6 +10,6 @@ COPY ./Makefile ./
 
 RUN make
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["./build/bin/pine"]
 
 EXPOSE 8080
