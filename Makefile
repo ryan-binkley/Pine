@@ -1,7 +1,7 @@
 CC := gcc
 INCLUDE_DIRS := $(shell find include -type d)
-INCLUDE_DEPENDENCYDIRS := $(shell find vendor -type d)
-INCLUDES := $(addprefix -I,$(INCLUDE_DIRS)) $(addprefix -I,$(VENDOR_INCLUDE_DIRS))
+INCLUDE_DEPENDENCY_DIRS := $(shell find vendor -type d)
+INCLUDES := $(addprefix -I,$(INCLUDE_DIRS)) $(addprefix -I,$(INCLUDE_DEPENDENCY_DIRS))
 CFLAGS := -Wall -Wextra $(INCLUDES)
 LDFLAGS := -lcurl
 
