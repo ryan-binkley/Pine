@@ -91,7 +91,7 @@ void log_message(Severity severity, const char *message, StatusCode http_status_
         curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_payload);
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L); // Skip SSL verification, like curl -k
 
-        if (strcmp(getenv(APP_ENV), "development") == 1 || strcmp(getenv(APP_ENV), "production") == 1)
+        if (strcmp(getenv(APP_ENV), "development") == 0 || strcmp(getenv(APP_ENV), "production") == 0)
         {
             res = curl_easy_perform(curl);
             if (res != CURLE_OK)
