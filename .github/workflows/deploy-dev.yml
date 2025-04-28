@@ -23,7 +23,8 @@ jobs:
           key: ${{ secrets.DEV_SSH_PRIVATE_KEY }}
           script: |
             cd /home/pine_user/Pine
-            echo "LOGTAIL_TOKEN=${{ secrets.LOGTAIL_TOKEN }}" > .env
+            echo "LOG_TOKEN=${{ secrets.LOG_TOKEN }}" > .env
+            echo "APP_ENV=${{ env.APP_ENV }}" >> .env
 
 
   deploy-to-dev:

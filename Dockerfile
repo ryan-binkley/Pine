@@ -10,6 +10,6 @@ COPY ./Makefile ./
 
 RUN make
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["./build/bin/pine"]
 
 EXPOSE 8080
