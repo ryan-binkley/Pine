@@ -24,7 +24,7 @@ jobs:
           script: |
             cd /home/pine_user/Pine
             echo "LOG_TOKEN=${{ secrets.LOG_TOKEN }}" > .env
-            echo "APP_ENV=${{ env.APP_ENV }}" >> .env
+            echo "APP_ENV=${{ vars.APP_ENV }}" >> .env
 
 
   deploy-to-dev:
