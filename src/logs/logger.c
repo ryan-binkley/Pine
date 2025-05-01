@@ -9,7 +9,7 @@
 #define LOG_TOKEN "LOG_TOKEN"
 #define APP_ENV "APP_ENV"
 
-static const char *severity_to_string(Severity severity)
+static const char* severity_to_string(Severity severity)
 {
     switch (severity)
     {
@@ -24,7 +24,7 @@ static const char *severity_to_string(Severity severity)
     }
 }
 
-static void get_utc_timestamp(char *buffer, size_t size)
+static void get_utc_timestamp(char* buffer, size_t size)
 {
     time_t now = time(NULL);
     struct tm *utc_time = gmtime(&now);
@@ -40,9 +40,9 @@ static int http_status_code_is_error(StatusCode http_status_code)
     return 0;
 }
 
-void log_message(Severity severity, const char *message, StatusCode http_status_code)
+void log_message(Severity severity, const char* message, StatusCode http_status_code)
 {
-    CURL *curl;
+    CURL* curl;
     CURLcode res;
     struct curl_slist *headers = NULL;
     char timestamp[64];
@@ -103,4 +103,15 @@ void log_message(Severity severity, const char *message, StatusCode http_status_
         curl_slist_free_all(headers);
         curl_easy_cleanup(curl);
     }
+}
+
+void log_debug(const char* message)
+{
+    fprintf(stdout, "[DEBUG] --- %s\n", message);
+}
+
+void log_debug_error(const char* message)
+{
+    fprintf(stderr, "[ERROR] --- %s\n", message);
+    perror(message);
 }

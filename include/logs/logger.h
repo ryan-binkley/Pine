@@ -19,5 +19,7 @@ typedef enum {
 
 
 void log_message(Severity severity, const char *message, StatusCode http_status_code);
+void log_debug(const char *message);
+void log_debug_error(const char* message);
 
 #endif // LOGGER_H
