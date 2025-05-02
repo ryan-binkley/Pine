@@ -1,9 +1,9 @@
-#include "munit.h"
-#include "test_server.h"
 #include <stdio.h>
+#include "munit.h"
+#include "test_retry.h"
 
 MunitSuite full_test_suite[] = {
-    {"/tests", NULL, test_server_suite, 1, MUNIT_SUITE_OPTION_NONE}
+    {"/tests", NULL, test_retry_suite, 1, MUNIT_SUITE_OPTION_NONE}
 };
 
 int main() {
