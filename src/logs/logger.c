@@ -1,13 +1,11 @@
-#include "logs/logger.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <curl/curl.h>
+#include "logs/logger.h"
+#include "config.h"
 
-#define LOG_ENDPOINT "https://s1288156.eu-nbg-2.betterstackdata.com"
-#define LOG_TOKEN "LOG_TOKEN"
-#define APP_ENV "APP_ENV"
 
 static const char* severity_to_string(Severity severity)
 {

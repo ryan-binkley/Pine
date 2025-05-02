@@ -1,9 +1,12 @@
 // server_setup.c
 #include <stdio.h>
+#include <stdlib.h>
 #include "logs/logger.h"
 #include "socket_handling/socket.h"
 #include "server/server.h"
 #include "utils/retry.h"
+#include "string.h"
+#include "config.h"
 
 int setup_server_socket() 
 {
@@ -22,7 +25,14 @@ int setup_server_socket()
     struct sockaddr_in server_addr;
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = INADDR_ANY;
-    server_addr.sin_port = htons(8080);
+    if (strcmp(getenv(APP_ENV), "local") == 0)
+    {
+        server_addr.sin_port = htons(8080);
+    }
+    else if (strcmp(getenv(APP_ENV), "development") == 0 || strcmp(getenv(APP_ENV), "production") == 0)
+    {
+        server_addr.sin_port = htons(80);
+    }
 
     SocketBindParams bind_params = {fd, (struct sockaddr *)&server_addr, sizeof(server_addr)};
     int bind_result = retry_operation(socket_bind, &bind_params, 3);
