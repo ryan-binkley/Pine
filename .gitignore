@@ -1,0 +1,28 @@
+# Build artifacts
+*.o
+*.out
+*.a
+*.so
+*.exe
+*.dll
+
+# Build directories
+build/*
+bin/*
+obj/*
+debug
+release
+
+# Core dumps
+core
+*.core
+
+# IDEs and tooling
+.vscode/
+
+# Ignore submodule-related files
+vendor/*/test/
+vendor/*/build/
+
+# Ignore environment files
+.env
